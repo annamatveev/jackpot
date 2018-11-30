@@ -69,12 +69,11 @@ export default class EventDrops extends React.PureComponent {
     const { chart } = this;
     if (events && events.length) {
       chart.destroy();
-      const d3chart = d3
-        .select(`#${id}`)
+      d3.select(`#${id}`)
         .data([events])
-        .call(chart);
-
-      d3chart.selectAll('.drop-line').attr('fill', (d, i) => pallete(i));
+        .call(chart)
+        .selectAll('.drop-line')
+        .attr('fill', (d, i) => pallete(i));
     }
   };
 
@@ -95,7 +94,6 @@ export default class EventDrops extends React.PureComponent {
             this.props.onDataPointHover(commit);
           }
         },
-        onMouseOut: () => {},
       },
     });
   }

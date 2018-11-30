@@ -5,7 +5,7 @@ import EventsProvider from '../EventsProvider';
 import ConnectedEventsDrops from '../ConnectedEventDrops';
 import withChosenEvent from '../withChosenEvent';
 
-const EventsPreviewWithChosenEvent = withChosenEvent(EventPreview);
+const EventPreviewWithChosenEvent = withChosenEvent(EventPreview);
 
 const Header = styled.div`
   font-weight: 100;
@@ -22,7 +22,7 @@ export default class HomePage extends React.PureComponent {
         <EventsProvider>
           <ConnectedEventsDrops />
         </EventsProvider>
-        <EventsPreviewWithChosenEvent />
+        <EventPreviewWithChosenEvent />
       </React.Fragment>
     );
   }

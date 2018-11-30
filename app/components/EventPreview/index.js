@@ -6,6 +6,7 @@ import posed from 'react-pose';
 const BoxWrapper = styled.div`
   margin: 0 auto;
   width: 300px;
+  height: 200px;
   border: 1px solid rgb(0, 255, 198);
   box-shadow: rgb(0, 255, 198) 0px 0px 10px 0px;
   background-color: #3b404d;
