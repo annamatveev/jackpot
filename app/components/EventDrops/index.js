@@ -61,6 +61,23 @@ export default class EventDrops extends React.PureComponent {
     return `eventdrops_component_${Math.floor(Math.random() * 10000000)}`;
   }
 
+  renderChartData = () => {
+    const pallete = d3.scaleOrdinal(d3.schemePaired);
+    // const pallete = d3.scaleSequential(d3.interpolateViridis);
+    const { events } = this.props;
+    const { id } = this.state;
+    const { chart } = this;
+    if (events && events.length) {
+      chart.destroy();
+      const d3chart = d3
+        .select(`#${id}`)
+        .data([events])
+        .call(chart);
+
+      d3chart.selectAll('.drop-line').attr('fill', (d, i) => pallete(i));
+    }
+  };
+
   initializeChart() {
     return eventDrops({
       d3,
@@ -82,20 +99,6 @@ export default class EventDrops extends React.PureComponent {
       },
     });
   }
-
-  renderChartData = () => {
-    const { events } = this.props;
-    const { id } = this.state;
-    const { chart } = this;
-
-    if (events && events.length) {
-      chart.destroy();
-
-      d3.select(`#${id}`)
-        .data([events])
-        .call(chart);
-    }
-  };
 
   componentDidMount() {
     this.renderChartData();

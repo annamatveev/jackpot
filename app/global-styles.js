@@ -3,20 +3,14 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle`
   html,
   body {
+  	font-family: 'Titillium Web', sans-serif;
     height: 100%;
     width: 100%;
+    background: #272E35;
+    padding: 20px;
   }
-
-  body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  }
-
-  body.fontLoaded {
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  }
-
+  
   #app {
-    background-color: #fafafa;
     min-height: 100%;
     min-width: 100%;
   }
@@ -32,8 +26,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-      font-size: 16px;
-      color: #222;
+      color: white;
+      font-weight: bold;
       padding: 0 3rem 1rem 3rem;
   }
   
@@ -78,12 +72,18 @@ const GlobalStyle = createGlobalStyle`
       text-align: left;
   }
   
-  .light {
-      color: #ffffff;
-  }
-  
   .drop {
       cursor: pointer;
+  }
+  
+  .bound {
+    font-size: 12px;
+    color: #6EEDBC;
+  }
+  
+  .axis {
+    color: #a2a2a2;
+    font-family: 'Titillium Web', sans-serif;
   }
   
   footer p {
