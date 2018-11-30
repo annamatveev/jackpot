@@ -89,6 +89,8 @@ export default class EventDrops extends React.PureComponent {
     const { chart } = this;
 
     if (events && events.length) {
+      chart.destroy();
+
       d3.select(`#${id}`)
         .data([events])
         .call(chart);
