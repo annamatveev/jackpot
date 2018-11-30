@@ -28,12 +28,11 @@ export const humanizeDate = date => {
 const updateCommitsInformation = chart => {
   const filteredData = chart
     .filteredData()
-    .reduce((total, repo) => total.concat(repo.events), []);
-
+    .reduce((total, calendar) => total.concat(calendar.data), []);
   return {
     zoomStart: humanizeDate(chart.scale().domain()[0]),
     zoomEnd: humanizeDate(chart.scale().domain()[1]),
-    numberCommitsContainer: filteredData.length,
+    data: filteredData,
   };
 };
 
@@ -86,11 +85,10 @@ export default class EventDrops extends React.PureComponent {
 
   renderChartData = () => {
     const { events } = this.props;
-    const { loading } = this.props;
     const { id } = this.state;
     const { chart } = this;
 
-    if (events.length) {
+    if (events && events.length) {
       d3.select(`#${id}`)
         .data([events])
         .call(chart);
@@ -107,6 +105,7 @@ export default class EventDrops extends React.PureComponent {
 
   render() {
     const { id } = this.state;
+    console.log(this.props);
     const { ...rest } = this.props;
     return <div id={id} {...rest} />;
   }
