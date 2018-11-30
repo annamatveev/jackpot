@@ -107,7 +107,6 @@ export default class EventDrops extends React.PureComponent {
 
   render() {
     const { id } = this.state;
-    console.log(this.props);
     const { ...rest } = this.props;
     return <div id={id} {...rest} />;
   }

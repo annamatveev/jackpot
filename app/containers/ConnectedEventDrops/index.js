@@ -5,12 +5,12 @@ import EventDrops from '../../components/EventDrops';
 import withEvents from '../withEvents';
 import withSelectEvent from '../withSelectEvent';
 
-const ConnectedEventsDrops = ({ events, onSelectEvent }) => (
-  <EventDrops events={events} onDataPointHover={onSelectEvent} />
+const ConnectedEventsDrops = ({ events, onSelectEvent, ...rest }) => (
+  <EventDrops events={events} onDataPointHover={onSelectEvent} {...rest} />
 );
 
 ConnectedEventsDrops.propTypes = {
-  events: PropTypes.array.isRequired,
+  events: PropTypes.any.isRequired,
   onSelectEvent: PropTypes.func,
 };
 

@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect';
-import { initialState } from 'containers/EventsProvider/reducer';
+import { initialState } from 'containers/withSelectEvent/reducer';
 
 const selectChosenEventProviderDomain = state =>
   state.get('selectEventProvider', initialState);
 
-const makeSelectEventProvider = () =>
+const makeSelectChosenEventProvider = () =>
   createSelector(selectChosenEventProviderDomain, substate => substate.toJS());
 
 const makeSelectChosenEvent = () =>
@@ -12,5 +12,5 @@ const makeSelectChosenEvent = () =>
     globalState.get('chosenEvent'),
   );
 
-export default makeSelectEventProvider;
+export default makeSelectChosenEventProvider;
 export { selectChosenEventProviderDomain, makeSelectChosenEvent };

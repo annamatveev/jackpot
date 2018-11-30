@@ -1,4 +1,4 @@
-import { fromJS, List } from 'immutable';
+import { fromJS } from 'immutable';
 import {
   LOAD_EVENTS_SUCCESS,
   LOAD_EVENTS,
@@ -17,7 +17,7 @@ export default function eventsProviderReducer(state = initialState, action) {
       return state
         .set('loading', true)
         .set('error', false)
-        .set('events', List());
+        .set('events', []);
     case LOAD_EVENTS_SUCCESS:
       return state.set('events', action.events).set('loading', false);
     case LOAD_EVENTS_ERROR:
