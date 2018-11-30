@@ -2,14 +2,13 @@
 
 <br />
 
-<div align="center"><strong>Ready to do event drops react component app based on react boilerplate</strong></div>
+<div><strong>Ready to go event drops react component app based on react boilerplate</strong></div>
 
 <br />
-<br />
 
-<div align="center">https://github.com/marmelab/EventDrops</div>
+<div>https://github.com/marmelab/EventDrops</div>
 <br />
-<div align="center">https://github.com/react-boilerplate/react-boilerplate</div>
+<div>https://github.com/react-boilerplate/react-boilerplate</div>
 
 <br />
 
