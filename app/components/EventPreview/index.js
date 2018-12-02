@@ -5,13 +5,15 @@ import posed from 'react-pose';
 
 const BoxWrapper = styled.div`
   margin: 0 auto;
-  width: 300px;
-  height: 200px;
+  width: 600px;
+  height: 250px;
   border: 1px solid rgb(0, 255, 198);
   box-shadow: rgb(0, 255, 198) 0px 0px 10px 0px;
   background-color: #3b404d;
   display: flex;
   flex-direction: column;
+  word-wrap: break-word;
+  overflow-y: scroll;
 `;
 
 const Header = styled.div`
@@ -54,10 +56,11 @@ export default class EventPreview extends React.PureComponent {
     return (
       <Box pose={this.state.animation ? 'visible' : 'hidden'}>
         <BoxWrapper>
-          <Header>Facebook Message</Header>
+          <Header>{this.props.event.type}</Header>
           <EventContent>
             <Date>20.02.1989</Date>
-            {this.props.event.message}
+            {JSON.stringify(this.props.event)}
+            {/* <img src={"data:image/png;base64," + this.props.event.link} /> */}
           </EventContent>
         </BoxWrapper>
       </Box>
