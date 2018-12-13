@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import posed from 'react-pose';
+import Moment from 'react-moment';
 
 const BoxWrapper = styled.div`
   margin: 0 auto;
@@ -58,7 +59,9 @@ export default class EventPreview extends React.PureComponent {
         <BoxWrapper>
           <Header>{this.props.event.type}</Header>
           <EventContent>
-            <Date>20.02.1989</Date>
+            <Date>
+              <Moment>{this.props.event.date}</Moment>
+            </Date>
             {JSON.stringify(this.props.event)}
             {/* <img src={"data:image/png;base64," + this.props.event.link} /> */}
           </EventContent>
