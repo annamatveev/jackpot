@@ -8,7 +8,7 @@ import {
 import request from 'utils/request';
 
 export function* getEvents() {
-  const requestURL = `http://192.168.85.16:3001/api/events`;
+  const requestURL = `http://localhost:3001/api/events`;
 
   try {
     const events = yield call(request, requestURL);
