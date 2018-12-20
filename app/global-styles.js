@@ -74,6 +74,12 @@ const GlobalStyle = createGlobalStyle`
   
   .drop {
       cursor: pointer;
+      &:hover {
+        stroke: #b8b8a3;
+        stroke-width: 1px;
+        z-index: 999;
+      }
+      
   }
   
   .bound {

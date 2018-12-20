@@ -13,6 +13,17 @@ const Header = styled.div`
   margin: 0 auto 20px;
   width: 140px;
 `;
+
+const Content = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const EventDropsWrapper = styled.div`
+  width: 65%;
+  min-width: 400px;
+  padding: 0 24px 0 24px;
+`;
 /* eslint-disable react/prefer-stateless-function */
 export default class HomePage extends React.PureComponent {
   render() {
@@ -20,9 +31,13 @@ export default class HomePage extends React.PureComponent {
       <React.Fragment>
         <Header>Timeline</Header>
         <EventsProvider>
-          <ConnectedEventsDrops />
+          <Content>
+            <EventDropsWrapper>
+              <ConnectedEventsDrops />
+            </EventDropsWrapper>
+            <EventPreviewWithChosenEvent />
+          </Content>
         </EventsProvider>
-        <EventPreviewWithChosenEvent />
       </React.Fragment>
     );
   }

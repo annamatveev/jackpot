@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as d3 from 'd3';
 import eventDrops from 'event-drops';
+import 'd3-selection';
 
 export const humanizeDate = date => {
   const monthNames = [
@@ -61,16 +62,18 @@ export default class EventDrops extends React.PureComponent {
     return `eventdrops_component_${Math.floor(Math.random() * 10000000)}`;
   }
 
-  renderChartData = () => {
-    const colors = [
-      '#ef5350',
-      '#ec407a',
-      '#ab47bc',
-      '#7e57c2',
-      '#5c6bc0',
-      '#42a5f5',
-      '#29b6f6',
-      '#26c6da',
+  generatePalette(opacity) {
+    return [
+      `rgb(239, 83, 80, ${opacity})`,
+      `rgb(236, 64, 122, ${opacity})`,
+      `rgb(171, 71, 188, ${opacity})`,
+      `rgb(126, 87, 194, ${opacity})`,
+      `rgb(92, 107, 192, ${opacity})`,
+      `rgb(66, 165, 245, ${opacity})`,
+      `rgb(41, 182, 246, ${opacity})`,
+      `rgb(38, 198, 218, ${opacity})`,
+      `rgb(38, 166, 154, ${opacity})`,
+      `rgb(38, 166, 154, ${opacity})`,
       '#26a69a',
       '#66bb6a',
       '#9ccc65',
@@ -83,23 +86,46 @@ export default class EventDrops extends React.PureComponent {
       '#bdbdbd',
       '#78909c',
     ];
-    const pallete = d3.scaleOrdinal(colors);
+  }
+
+  renderChartData = () => {
     const { events } = this.props;
     const { id } = this.state;
     const { chart } = this;
+    const { onDataPointHover } = this.props;
     if (events && events.length) {
-      chart.destroy();
-      d3.select(`#${id}`)
+      const chartD3 = d3
+        .select(`#${id}`)
         .data([events])
-        .call(chart)
-        .selectAll('.drop-line')
-        .attr('fill', (d, i) => pallete(i));
+        .call(chart);
+
+      const palleteTransparent = d3.scaleOrdinal(this.generatePalette(0.35));
+      const palleteOpaque = d3.scaleOrdinal(this.generatePalette(1));
+
+      [
+        { selector: '.drops', pallete: palleteTransparent },
+        { selector: '.line-label', pallete: palleteOpaque },
+        { selector: '.indicator', pallete: d3.scaleOrdinal(['#ffffff4f']) },
+      ].map(({ selector, pallete }) =>
+        chartD3.selectAll(selector).attr('fill', (d, i) => pallete(i)),
+      );
+
+      d3.selectAll('.drop').on('click', function(pointData) {
+        d3.selectAll('.drop').style('stroke', null);
+        d3.select(this)
+          .style('stroke', 'white')
+          .style('stroke-width', '2px');
+        if (onDataPointHover) {
+          onDataPointHover(pointData);
+        }
+      });
     }
   };
 
   initializeChart() {
     return eventDrops({
       d3,
+      metaballs: false,
       zoom: {
         onZoomEnd: () => {
           if (this.props.onZoom) {
@@ -108,18 +134,20 @@ export default class EventDrops extends React.PureComponent {
         },
       },
       drop: {
+        color: null,
+        radius: 14,
         date: d => new Date(d.date),
-        onMouseOver: commit => {
-          if (this.props.onDataPointHover) {
-            this.props.onDataPointHover(commit);
-          }
+        onClick(commit) {
+          debugger;
         },
       },
+      numberDisplayedTicks: {
+        small: 3,
+        medium: 4,
+        large: 5,
+        extra: 6,
+      },
     });
-  }
-
-  componentDidMount() {
-    this.renderChartData();
   }
 
   componentDidUpdate() {
